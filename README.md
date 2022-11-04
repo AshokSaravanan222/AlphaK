@@ -2,7 +2,7 @@
 
 November 2021 - Present
 
-Machine learning software that can detect handwritten digits on a homework organizer
+Machine learning software that can detect handwritten digits on a homework organizer.
 
 # How it Works
 Data entry can be very time consuming to do manually, so AlphaK offers a faster solution: a machine learning alogrithm. 
