@@ -1,6 +1,6 @@
 # AlphaK
 
-November 2021 - Present
+**November 2021 - Present**
 
 Machine learning software that can detect handwritten digits on a homework organizer.
 
@@ -11,23 +11,23 @@ The program will take in an image of a homework sheet, and extract the informati
 
 # Implementation
 
-Images of homework sheets are obtained: using a phone scanner or other software:
+**Images of homework sheets are obtained: using a phone scanner or other software:**
 
 <img src="https://user-images.githubusercontent.com/90977640/199877144-86aab7c5-2e34-4cd4-84e6-20f002523eb5.png" width=60% height=50%>
 
-Location of name and Student ID are found:
+**Location of name and Student ID are found:**
 
 <img src="https://user-images.githubusercontent.com/90977640/199623382-356dcd95-c230-4548-9f4d-bb0873188340.png" width=60% height=50%>
 
-Location of homework sheet boxes are found:
+**Location of homework sheet boxes are found:**
 
 <img src="https://user-images.githubusercontent.com/90977640/199623347-cd805ac7-5f96-4862-8f4e-1f5c8b43f618.png" width=60% height=50%>
 
-Each segment of the image is run though machine learning software:
+**Each segment of the image is run though machine learning software:**
 
 <img src="https://user-images.githubusercontent.com/90977640/199623463-7400338f-c535-41ad-aac2-4c3c93f894ae.png" width=50% height=50%> <img src="https://user-images.githubusercontent.com/90977640/199623526-9ff2ea6d-9f34-4dbb-901e-4847d5171bb0.png" width=40% height=50%>
 
-Computer Output:
+**Computer Output:**
 
 <img src="https://user-images.githubusercontent.com/90977640/199623500-1da562ce-7d01-40c2-ba73-130b7539aaa1.png" width=70% height=50%>
 
