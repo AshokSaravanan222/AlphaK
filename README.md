@@ -44,3 +44,5 @@ Used only 6s, 7s, 8s, and 9s on MNIST 28x28 handwritten digit dataset. Used a lo
 
 Used all images from MNIST database, and did not have to use as much image augmentaion.
 
+# Code
+I cannot release all the code publicly right now; however, I am currently working on creating a library for my code, making it accessible for people to adjust and implement new methods for parts of the code.
