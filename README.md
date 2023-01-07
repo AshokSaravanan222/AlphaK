@@ -2,7 +2,7 @@
 
 **November 2021 - Present**
 
-Machine learning software that can detect handwritten digits on a homework organizer.
+Python machine learning software that can detect handwritten digits on a homework organizer.
 
 # How it Works
 Data entry can be very time consuming to do manually, so AlphaK offers a faster solution: a machine learning alogrithm. 
@@ -45,4 +45,4 @@ Used only 6s, 7s, 8s, and 9s on MNIST 28x28 handwritten digit dataset. Used a lo
 Used all images from MNIST database, and did not have to use as much image augmentaion.
 
 # Code
-I cannot release all the code publicly right now; however, I am currently working on creating a library for my code, making it accessible for people to adjust and implement new methods for parts of the code.
+I am currently working on refactoring  my code, making it accessible for people to adjust and implement new methods for parts of the code.
