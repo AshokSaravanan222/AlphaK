@@ -14,18 +14,16 @@ def search(student):
     pyautogui.press('enter')
     pyautogui.press('f6')
 
-
-def enter(scores):
-
-    def check_dates():
+def check_dates():
         return True
 
-    def prime_cursor():
-        pyautogui.click('cursor.png')
-        pyautogui.press('down')
-        pyautogui.press('up')
+def prime_cursor():
+    pyautogui.click('cursor.png')
+    pyautogui.press('down')
+    pyautogui.press('up')
 
-    #CODE
+
+def enter(scores):
     for score in scores[0:1]:
         score = score.split()
         if not check_dates():
@@ -68,6 +66,8 @@ def enter(scores):
 for student in data:
     pyautogui.confirm(text=student, title='Scan Student', buttons=['OK', 'Cancel'])
     # search(student)
+    prime_cursor()
+    pyautogui.press('right', presses=4)
     print(data[student])
 
 
