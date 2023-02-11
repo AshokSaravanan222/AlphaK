@@ -33,6 +33,14 @@ def find_numbers():
     return number_boxes
 
 
+def find_cursor():
+    return find_box('images/cursor.png')
+
+
+def find_score_boxes():
+    return {"date": find_date(), "time": find_time(), "numbers": find_numbers()}
+
+
 def click(box):
     center = pyautogui.center(box)
     pyautogui.click(center[0], center[1])
@@ -41,26 +49,58 @@ def click(box):
 def create_search_term(student):
     return student[0:3].lower()
 
-# TODO:
 
-def search(student):
-    click()
+def search_student(student):
+    click(find_find())
     pyautogui.write(create_search_term(student))
-    pyautogui.press(['enter', 'f6'], interval=0.1)
+    pyautogui.press('enter')
 
-def check_dates():
-        return True
+
+def check_student(student):
+    return True
+
+
+def open_student():
+    pyautogui.press('f6')
+
+
+# TODO: find close button or setup system
+def close_student():
+    return True
+
+
+def check_calender():
+    return True
+
 
 def prime_cursor():
-    pyautogui.click('cursor.png')
-    pyautogui.press('down')
-    pyautogui.press('up')
+    location = find_cursor()
+    click(location)
+    pyautogui.press(['down', 'up'], interval=0.1)
+    return location
 
 
-def enter(scores):
+def enter():
+    cursor = prime_cursor()
+
+
+def intersect(cursor, box):
+    return pyautogui.screenshot(region=(box.left, cursor.top, box.width, cursor.height))
+
+
+def check(image, text):
+    return pytesseract.image_to_string(image) == text
+
+
+def picture_date(cursor, date_box, date_text):
+    image = intersect(cursor, date_box)
+    check(image, date_text)
+
+
+def enter0(scores):
     for score in scores[0:1]:
         score = score.split()
-        if not check_dates():
+        if not check_calender():
             return
 
         prime_cursor()
