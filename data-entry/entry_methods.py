@@ -3,9 +3,7 @@ import json
 import pytesseract
 import datetime
 
-with open('test.json') as file:
-    data = json.load(file)
-
+score_open = False
 
 def find_box(path):
     box_location = pyautogui.locateOnScreen(path)
@@ -16,6 +14,14 @@ def find_box(path):
 
 def find_find():
     return pyautogui.locateOnScreen('images/find.png')
+
+
+def find_save():
+    return pyautogui.locateOnScreen('images/save.png')
+
+
+def find_save_close():
+    return pyautogui.locateOnScreen('images/save_close.png')
 
 
 def find_time():
@@ -38,7 +44,9 @@ def find_cursor():
 
 
 def find_score_boxes():
-    return {"date": find_date(), "time": find_time(), "numbers": find_numbers()}
+    return {"date": find_date(), "time": find_time(),
+            "numbers": find_numbers(),
+            "save": find_save(), "save_close": find_save_close()}
 
 
 def click(box):
@@ -61,12 +69,19 @@ def check_student(student):
 
 
 def open_student():
+    # Not checking if closed because pressing f6 when open does nothing
     pyautogui.press('f6')
+    score_open = True
 
 
 # TODO: find close button or setup system
 def close_student():
-    return True
+    if score_open:
+        click(find_save_close())
+        score_open = False
+    else:
+        
+    
 
 
 def check_calender():
@@ -96,6 +111,9 @@ def picture_date(cursor, date_box, date_text):
     image = intersect(cursor, date_box)
     check(image, date_text)
 
+
+with open('test.json') as file:
+    data = json.load(file)
 
 def enter0(scores):
     for score in scores[0:1]:
