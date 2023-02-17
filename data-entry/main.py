@@ -1,3 +1,7 @@
-import entry_methods as entry
+def search_student(student):
+    """
+    A function that selects a student on the main screen.
 
-find = entry.find_find()
+    :param student: the full name of the student that needs to be searched
+    :return: None
+    """
