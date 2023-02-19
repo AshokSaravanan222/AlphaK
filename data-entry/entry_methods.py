@@ -5,8 +5,6 @@ import datetime
 import buttons
 
 
-
-
 with open('test.json') as file:
     data = json.load(file)
 

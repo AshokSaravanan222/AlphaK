@@ -19,6 +19,13 @@ def find_cursor():
     return pyautogui.locateOnScreen('images/cursor.png')
 
 
+def find_refresh():
+    """
+
+    :return:
+    """
+
+
 def find_date():
     """
     A function that finds the coordinates of the 'date' box on the score entry page.
@@ -76,3 +83,13 @@ def find_score_boxes():
     return {"date": find_date(), "time": find_time(),
             "numbers": find_numbers(),
             "save": find_save(), "save_close": find_save_close()}
+
+
+def find_calender_boxes(cursor, refresh_box):
+    """
+
+    :param cursor:
+    :param refresh_box:
+    :return:
+    """
+

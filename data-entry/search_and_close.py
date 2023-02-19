@@ -40,6 +40,7 @@ def enter_search_term(search_term):
     :param search_term: String that is to be entered to find the student
     :return:
     """
+    pyautogui.write(search_term, interval=0.1)
 
 
 def close_search():
@@ -78,5 +79,3 @@ def close_student(save_close_button):
     :return: None
     """
     click(save_close_button)
-
-

@@ -1,3 +1,8 @@
+import buttons
+import enter
+import search_and_close
+
+
 def search_student(student):
     """
     A function that selects a student on the main screen.
