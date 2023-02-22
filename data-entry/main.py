@@ -1,28 +1,30 @@
-import buttons
-import enter
-import search_and_close
+from cms import *
+
 
 def find_buttons():
     """
-    A function that finds all the buttons on the main screen and score card entry page. 
-    """
-    
+    A function that finds all the static buttons on the main screen and score entry page.
 
-def search_student(student, find_button):
+    :return: a dictionary with the coordinates of all static buttons/boxes that will need to be pressed/accessed
     """
-    A function that opens a student from the main screen.
 
-    :param student: the full name of the student that needs to be searched
-    :return: None
+    search.open_student()
+
+    buttons_dict = buttons.find_score_boxes()
+    calendar_boxes = buttons.find_calender_boxes(buttons.find_cursor(), buttons_dict["refresh"])
+
+    search.click(buttons_dict["save_close"])
+
+    find_button = buttons.find_find()
+    buttons_dict.update({"find": find_button, "date_from": calendar_boxes[0], "date_to": calendar_boxes[1]})
+
+    return buttons_dict
+
+
+def enter_student(name):
     """
-    
-def adjust_calendar(cursor, refresh_button, date_range):
+
+    :param name:
+    :return:
     """
-    A function that adjusts the calender on the score entry page to have the correct dates when entering a student's data.
-    
-    :param date_range: tuple: (start_date, end_date), where parameters are Datetime obejcts that represent the date ranges of the scores to be entered
-    """
-    
-def enter_row():
-    
 

@@ -21,9 +21,11 @@ def find_cursor():
 
 def find_refresh():
     """
+    A function that finds the coordinates of the 'refresh' button on the score entry page.
 
-    :return:
+    :return: the location of the button if found (tuples of length 4) and raises ImageNotFoundException otherwise
     """
+    return pyautogui.locateOnScreen('images/refresh.png')
 
 
 def find_date():
@@ -60,7 +62,7 @@ def find_save():
     """
     A function that finds the coordinates of the 'save' button on the score entry page.
 
-    :return: the location of the box if found (tuple of length 4) and raises ImageNotFoundException otherwise
+    :return: the location of the button if found (tuple of length 4) and raises ImageNotFoundException otherwise
     """
     return pyautogui.locateOnScreen('images/save.png')
 
@@ -69,9 +71,26 @@ def find_save_close():
     """
     A function that finds the coordinates of the 'save_close' button on the score entry page.
 
-    :return: the location of the box if found (tuple of length 4) and raises ImageNotFoundException otherwise
+    :return: the location of the button if found (tuple of length 4) and raises ImageNotFoundException otherwise
     """
     return pyautogui.locateOnScreen('images/save_close.png')
+
+
+# WRAPPER METHODS
+
+
+def find_calender_boxes(cursor, refresh_button):
+    """
+
+    A function that finds the coordinates of the two calendar date boxes on the score entry page.
+
+    :param cursor: the coordinates of the cursor box (tuple of length 4)
+    :param refresh_button: the coordinates of the refresh button (tuple of length 4)
+    :return: (date_from, date_to) where parameters are the coordinates of start and end date on the score entry page
+    """
+    date_from = (cursor.left + refresh_button.width, refresh_button.top, refresh_button.width, refresh_button.height)
+    date_to = (cursor.left + (3*refresh_button.width), refresh_button.top, refresh_button.width, refresh_button.height)
+    return date_from, date_to
 
 
 def find_score_boxes():
@@ -82,14 +101,5 @@ def find_score_boxes():
     """
     return {"date": find_date(), "time": find_time(),
             "numbers": find_numbers(),
-            "save": find_save(), "save_close": find_save_close()}
-
-
-def find_calender_boxes(cursor, refresh_box):
-    """
-
-    :param cursor:
-    :param refresh_box:
-    :return:
-    """
-
+            "save": find_save(), "save_close": find_save_close(),
+            "refresh": find_refresh()}

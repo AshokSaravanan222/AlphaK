@@ -1,5 +1,4 @@
 import unittest
-import entry_methods
 
 
 class TestEntry(unittest.TestCase):

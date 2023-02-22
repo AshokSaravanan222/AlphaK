@@ -79,3 +79,19 @@ def close_student(save_close_button):
     :return: None
     """
     click(save_close_button)
+
+
+# WRAPPER METHODS
+
+
+def search_student(student, find_button):
+    """
+    A function that searches up a student the main screen.
+
+    :param find_button: the coordinates of the 'find' button
+    :param student: the full name of the student that needs to be searched
+    :return: None
+    """
+    open_search(find_button)
+    search_term = create_search_term(student)
+    enter_search_term(search_term)
