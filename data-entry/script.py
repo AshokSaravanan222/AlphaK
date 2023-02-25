@@ -2,11 +2,12 @@ import pyautogui
 import json
 import datetime
 import main
+from cms import *
 
 with open('students.JSON') as file:
     data = json.load(file)
 
-buttons_dict = main.find_buttons()
+buttons_dict = find_buttons()
 
 for student in data:
 

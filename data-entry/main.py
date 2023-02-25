@@ -1,30 +1,17 @@
-from cms import *
 
 
-def find_buttons():
-    """
-    A function that finds all the static buttons on the main screen and score entry page.
-
-    :return: a dictionary with the coordinates of all static buttons/boxes that will need to be pressed/accessed
-    """
-
-    search.open_student()
-
-    buttons_dict = buttons.find_score_boxes()
-    calendar_boxes = buttons.find_calender_boxes(buttons.find_cursor(), buttons_dict["refresh"])
-
-    search.click(buttons_dict["save_close"])
-
-    find_button = buttons.find_find()
-    buttons_dict.update({"find": find_button, "date_from": calendar_boxes[0], "date_to": calendar_boxes[1]})
-
-    return buttons_dict
+class Score(object):
+    def __init__(self, date, time, score):
+        self.page = Page(path_to_image)
+        self.image = self.page.image
+        self.subjectBox, self.firstNameBox, self.lastNameBox, self.idBox = self.page.detectIdentityBoxes()
 
 
-def enter_student(name):
-    """
+class Student(object):
+    def __init__(self, name, student_id, score):
+        self.page = Page(path_to_image)
+        self.image = self.page.image
+        self.subjectBox, self.firstNameBox, self.lastNameBox, self.idBox = self.page.detectIdentityBoxes()
 
-    :param name:
-    :return:
-    """
+
 
