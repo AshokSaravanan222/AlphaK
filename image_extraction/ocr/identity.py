@@ -1,18 +1,26 @@
 import cv2
+import ocr
 
 
-def find_image_contours():
-    """
-    A function that finds the contours of image so the identity boxes can be found.
-    :return:
-    """
-
-
-def find_subject_box():
+def find_subject_box(image):
     """
     A function that finds the 'subject' identity box on an image of a homework organizer.
+
+    :param image:
     :return: A Box object that represents the location of the 'subject' box
     """
+    image = ocr.preprocess_image(image)
+    thresh = ocr.threshold_image(image)
+
+    kernel = ocr.create_kernel((4, 4))
+
+    dilate = ocr.dilate_image(thresh, kernel, 1)
+    erode = ocr.erode_image(thresh, kernel, 1)
+
+    opening = ocr.perform_opening(thresh, kernel)
+    closing = ocr.perform_closing(thresh, kernel)
+
+    return ocr.display(opening)
 
 
 def find_name_box():
