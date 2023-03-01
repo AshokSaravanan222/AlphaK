@@ -28,7 +28,7 @@ def create_kernel(kernel_size):
     """
     A function that creates a rectangular kernel given the kernel size
     :param kernel_size: (x, y), where size of parameters indicate how much to enlarge components in x or y direction
-    :return: a kernel that can be used to perform ocr operations
+    :return: a kernel that can be used to perform detection operations
     """
     return cv2.getStructuringElement(cv2.MORPH_RECT, kernel_size)
 
@@ -95,24 +95,3 @@ def find_contours():
     :return:
     """
 
-
-def draw_box(box, image):
-    """
-    A function that draws a green box on an image.
-
-    :param box: Box object that is to be drawn on the image
-    :param image: image (numpy array created by cv2.imread())
-    :return: image with box drawn on top of it
-    """
-    return cv2.rectangle(image, (box.x, box.y), (box.x + box.w, box.y + box.h), (36, 255, 12), 3)
-
-
-def display(image):
-    """
-    A function that displays a popup of an image using the cv2.imshow() method.
-
-    :param image: the image that would like to be displayed.
-    :return: the key that was pressed to close the window
-    """
-    cv2.imshow('result', image)
-    return cv2.waitKeyEx(0)

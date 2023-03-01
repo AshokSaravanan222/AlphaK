@@ -1,6 +1,6 @@
 
 
-def find_score_boxes():
+def find_score_box_bounds():
     """
     A function that finds the bounds of the score boxes on an image of a homework organizer.
     :return: A Box object that represents the location of the score boxes
