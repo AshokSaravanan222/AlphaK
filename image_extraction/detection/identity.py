@@ -18,7 +18,7 @@ def find_page(image):
     return imutils.crop(page, image)
 
 
-def find_identity_box(image):
+def find_identity_boxes(image):
     """
     A function that finds the location of the identity information (subject, name, and student_id).
 
@@ -31,9 +31,27 @@ def find_identity_box(image):
     return imutils.crop(identity_box, image)
 
 
-def remove_borders():
+def remove_border_boxes(image, boxes):
     """
 
+    :return:
+    """
+
+
+def remove_small_boxes(image, boxes):
+    """
+    small width
+    :param image:
+    :param boxes:
+    :return:
+    """
+
+
+def remove_logo(image, boxes):
+    """
+
+    :param image:
+    :param boxes:
     :return:
     """
 
@@ -47,11 +65,11 @@ def find_subject_box(image):
     :param image:
     :return: A Box object that represents the location of the 'subject' box
     """
-    # image = find_identity_box(image)
+    image = find_identity_boxes(image)
     image = ocr.preprocess_image(image)
     thresh = ocr.threshold_image(image)
 
-    kernel = ocr.create_kernel((4, 4))
+    kernel = ocr.create_kernel((15, 23))
 
     dilate = ocr.dilate_image(thresh, kernel, 1)
     erode = ocr.erode_image(thresh, kernel, 1)
@@ -62,14 +80,14 @@ def find_subject_box(image):
     # kernel = ocr.create_kernel((25, 1))
     # dilate = ocr.dilate_image(opening, kernel, 1)
 
-    contours = ocr.find_contours(opening)
-    opening = cv2.cvtColor(image, cv2.COLOR_GRAY2RGB)
+    contours = ocr.find_contours(dilate)
+    dilate = cv2.cvtColor(image, cv2.COLOR_GRAY2RGB)
 
-    # for c in contours:
-    #     x, y, w, h = cv2.boundingRect(c)
-    #     imutils.draw_box(imutils.Box(x, y, w, h), opening)
+    for c in contours:
+        x, y, w, h = cv2.boundingRect(c)
+        imutils.draw_box(imutils.Box(x, y, w, h), dilate)
 
-    return opening
+    return dilate
 
 
 def find_name_box():

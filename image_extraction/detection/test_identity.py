@@ -6,7 +6,7 @@ import identity
 
 class TestIdentity(unittest.TestCase):
 
-    image = imutils.read_image('test_images/image1.png')
+    image = imutils.read_image('test_images/image8.png')
 
     yes = 121  # keyboard code for 'y'
     no = 110  # keyboard code for 'n'
@@ -16,7 +16,7 @@ class TestIdentity(unittest.TestCase):
     #     self.assertEqual(imutils.display(image, "page"), self.yes)
 
     def test_find_identity_box(self):
-        image = identity.find_identity_box(self.image)
+        image = identity.find_identity_boxes(self.image)
         self.assertEqual(imutils.display(image, "identity"), self.yes)
 
     def test_find_subject_box(self):
