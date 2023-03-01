@@ -1,5 +1,6 @@
 import ocr
 import imutils
+import cv2
 
 
 def find_page(image):
@@ -12,7 +13,8 @@ def find_page(image):
     height, width, _ = image.shape
 
     border = (0.135, 0.07)
-    page = imutils.Box(border[0] * width, border[1] * height, (1-2*border[0]) * width, (1-2*border[1]) * height)
+    # page = imutils.Box(border[0] * width, border[1] * height, (1-2*border[0]) * width, (1-2*border[1]) * height)
+    page = imutils.Box(200, 100, 1300, 2000)
     return imutils.crop(page, image)
 
 
@@ -45,7 +47,7 @@ def find_subject_box(image):
     :param image:
     :return: A Box object that represents the location of the 'subject' box
     """
-    image = find_identity_box(image)
+    # image = find_identity_box(image)
     image = ocr.preprocess_image(image)
     thresh = ocr.threshold_image(image)
 
@@ -57,8 +59,15 @@ def find_subject_box(image):
     opening = ocr.perform_opening(thresh, kernel)
     closing = ocr.perform_closing(thresh, kernel)
 
-    kernel = ocr.create_kernel((25, 1))
-    dilate = ocr.dilate_image(opening, kernel, 1)
+    # kernel = ocr.create_kernel((25, 1))
+    # dilate = ocr.dilate_image(opening, kernel, 1)
+
+    contours = ocr.find_contours(opening)
+    opening = cv2.cvtColor(image, cv2.COLOR_GRAY2RGB)
+
+    # for c in contours:
+    #     x, y, w, h = cv2.boundingRect(c)
+    #     imutils.draw_box(imutils.Box(x, y, w, h), opening)
 
     return opening
 

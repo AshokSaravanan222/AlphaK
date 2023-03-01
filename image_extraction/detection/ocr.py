@@ -89,9 +89,14 @@ def perform_closing(image, kernel):
     return cv2.morphologyEx(image, cv2.MORPH_CLOSE, kernel)
 
 
-def find_contours():
+def find_contours(image):
     """
     A function that finds the contours of image so the identity boxes can be found.
-    :return:
+
+    :param image: the image that contours are going to be found on
+    :return: an array of the contours found in the image
     """
+    contours, hierarchy = cv2.findContours(image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    return contours
+
 
