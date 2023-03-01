@@ -48,12 +48,13 @@ def draw_box(box, image):
     return cv2.rectangle(image, (box.x, box.y), (box.x + box.w, box.y + box.h), (36, 255, 12), 3)
 
 
-def display(image):
+def display(image, win_name):
     """
     A function that displays a popup of an image using the cv2.imshow() method.
 
-    :param image: the image that would like to be displayed.
+    :param image: the image that would like to be displayed
+    :param win_name: the name of the window that pops up
     :return: the key that was pressed to close the window
     """
-    cv2.imshow('result', image)
+    cv2.imshow(win_name, image)
     return cv2.waitKeyEx(0)

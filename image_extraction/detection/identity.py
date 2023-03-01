@@ -1,5 +1,19 @@
 import ocr
-import image_methods
+import imutils
+
+
+def find_page(image):
+    """
+    A function that crops off the white borders on each image to isolate the homework organizer.
+
+    :param image: the image of the document-scanned page
+    :return: the image of just the homework organizer
+    """
+    height, width, _ = image.shape
+
+    border = (0.135, 0.07)
+    page = imutils.Box(border[0] * width, border[1] * height, (1-2*border[0]) * width, (1-2*border[1]) * height)
+    return imutils.crop(page, image)
 
 
 def find_identity_box(image):
@@ -11,8 +25,8 @@ def find_identity_box(image):
     """
     height, width, _ = image.shape
 
-    identity_box = image_methods.Box(0.1 * width, 0.07 * height, 0.35 * width, 0.12 * height)
-    return image_methods.crop(identity_box, image)
+    identity_box = imutils.Box(0.1 * width, 0.07 * height, 0.35 * width, 0.12 * height)
+    return imutils.crop(identity_box, image)
 
 
 def remove_borders():
@@ -22,6 +36,7 @@ def remove_borders():
     """
 
 #  WRAPPER METHODS
+
 
 def find_subject_box(image):
     """

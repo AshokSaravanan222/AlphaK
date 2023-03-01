@@ -1,5 +1,5 @@
 import unittest
-import image_methods
+import imutils
 
 import score
 
