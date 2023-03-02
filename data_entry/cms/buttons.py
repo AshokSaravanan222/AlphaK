@@ -10,6 +10,24 @@ def find_find():
     return pyautogui.locateOnScreen('images/find.png')
 
 
+def find_criteria():
+    """
+    
+    """
+
+    
+def find_look_for():
+    """
+    
+    """
+
+    
+def find_ok():
+    """
+    
+    """
+
+
 def find_cursor():
     """
     A function that finds the coordinates of the 'cursor' box on the score entry page.
@@ -77,6 +95,17 @@ def find_save_close():
 
 
 # WRAPPER METHODS
+
+
+def find_category_box(criteria, ok):
+    """
+    
+    """
+
+def find_search_box(look_for, ok):
+    """
+    
+    """
 
 
 def find_calender_boxes(cursor, refresh_button):
