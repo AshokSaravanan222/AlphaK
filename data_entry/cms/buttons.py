@@ -12,19 +12,25 @@ def find_find():
 
 def find_criteria():
     """
-    
+    A function that finds the coordinates of the 'criteria' box on the search window.
+
+    :return: the location of the button if found (tuple of length 4) and raises ImageNotFoundException otherwise
     """
 
     
 def find_look_for():
     """
-    
+    A function that finds the coordinates of the 'look_for' box on the search window.
+
+    :return: the location of the button if found (tuple of length 4) and raises ImageNotFoundException otherwise
     """
 
     
 def find_ok():
     """
-    
+    A function that finds the coordinates of the 'ok' button on the search window.
+
+    :return: the location of the button if found (tuple of length 4) and raises ImageNotFoundException otherwise
     """
 
 
@@ -99,12 +105,21 @@ def find_save_close():
 
 def find_category_box(criteria, ok):
     """
-    
+    A function that finds the coordinates of the 'category' box on the search window.
+
+    :param criteria: the coordinates of the 'criteria' box (tuple of length 4)
+    :param ok: the coordinates of the 'ok' button (tuple of length 4)
+    :return: the coordinates of the 'category' box (the intersection of the 'criteria' and 'ok' boxes)
     """
+
 
 def find_search_box(look_for, ok):
     """
-    
+    A function that finds the coordinates of the 'search' box on the search window.
+
+    :param look_for: the coordinates of the 'look_for' box (tuple of length 4)
+    :param ok: the coordinates of the 'ok' button (tuple of length 4)
+    :return: the coordinates of the 'search' box (the intersection of the 'look_for' and 'ok' boxes)
     """
 
 

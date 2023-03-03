@@ -13,24 +13,21 @@ def click(box):
     pyautogui.click(center[0], center[1])
 
 
-def create_search_term(student):
+def select_category(category):
     """
-    A function that creates a unique search term for a student in the database.
-
-    :param student: the full name of the student
-    :return: a 3-letter search term (String) that can be used to find the student
-    """
-    return student[0:3].lower()
-
-
-def open_search(find_button):
-    """
-    A function that opens the search window on the main screen.
-
-    :param find_button: the coordinates of the 'find' button (derived from buttons module)
+    A function that moves the cursor to select a category to search the student by (first name, last name, or id).
+    :param category: one of three strings: 'first', 'last', or 'id'
     :return: None
     """
-    click(find_button)
+    match category:
+        case "first":
+            pass
+        case "last":
+            pyautogui.press('down', presses=1)
+        case "id":
+            pyautogui.press('down', presses=2)
+        case _:
+            pass
 
 
 def enter_search_term(search_term):
@@ -41,15 +38,6 @@ def enter_search_term(search_term):
     :return:
     """
     pyautogui.write(search_term, interval=0.1)
-
-
-def close_search():
-    """
-    A function that closes the search window by pressing the 'enter' key on the keyboard.
-
-    :return: None
-    """
-    pyautogui.press('enter')
 
 
 def check_student(student):
@@ -83,15 +71,46 @@ def close_student(save_close_button):
 
 # WRAPPER METHODS
 
-
-def search_student(student, find_button):
+def open_search(find_button):
     """
-    A function that searches up a student the main screen.
+    A function that opens the search window on the main screen.
 
-    :param find_button: the coordinates of the 'find' button
-    :param student: the full name of the student that needs to be searched
+    :param find_button: the coordinates of the 'find' button (derived from buttons module)
     :return: None
     """
-    open_search(find_button)
-    search_term = create_search_term(student)
+    click(find_button)
+
+
+def close_search(ok_button):
+    """
+    A function that closes the search window by pressing the 'ok' button on the search window screen.
+
+    :param ok_button: the coordinates of the 'find' button (derived from buttons module)
+    :return: None
+    """
+    click(ok_button)
+
+
+def enter_category(category_box, category):
+    """
+    A function that selects the category to search for a student on the search window.
+    Ex: by first name, last name, or id
+
+    :param category_box: the coordinates of the 'category' box
+    :param category: the category to search the student by (first name, last name or id)
+    :return: None
+    """
+    click(category_box)
+    select_category(category)
+
+
+def enter_search(search_box, search_term):
+    """
+    A function that enters a search_term on the search window.
+
+    :param search_box: the coordinates of the 'search' box
+    :param search_term: the search term that corresponds with the category selected (first name, last name or id)
+    :return: None
+    """
+    click(search_box)
     enter_search_term(search_term)

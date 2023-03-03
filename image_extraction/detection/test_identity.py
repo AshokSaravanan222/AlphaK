@@ -6,7 +6,7 @@ import identity
 
 class TestIdentity(unittest.TestCase):
 
-    image = imutils.read_image('test_images/image8.png')
+    image = imutils.read_image('test_images/image7.png')
 
     yes = 121  # keyboard code for 'y'
     no = 110  # keyboard code for 'n'
