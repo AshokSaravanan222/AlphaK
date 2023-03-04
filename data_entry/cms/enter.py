@@ -22,15 +22,18 @@ def screenshot(coordinates):
     return pyautogui.screenshot(region=coordinates)
 
 
-def adjust_calendar(cursor, refresh_button, date_range):
-    # TODO: Find out how to adjust the dates by typing in CMS program
+def adjust_calendar(start_date, end_date, date_from, date_to, refresh):
     """
     A function that adjusts the calendar on the score entry page to have a valid range of dates.
 
-    :param refresh_button: the coordinates of the refresh button
-    :param cursor: the coordinates of the cursor
-    :param date_range: tuple: (start_date, end_date), where parameters are Datetime objects
+    :param start_date: a Datetime object that represents the starting date of a homeowner organizer
+    :param end_date: a Datetime object that represents the ending date of a homeowner organizer
+    :param date_from: the coordinates of the 'date_from' box
+    :param date_from: the coordinates of the 'date_to' box
+    :param refresh: the coordinates of the refresh button
+    :return: None
     """
+    # TODO: implement adjust_calendar method
 
 
 def extract_date(image):

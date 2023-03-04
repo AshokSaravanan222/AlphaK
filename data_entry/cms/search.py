@@ -13,6 +13,15 @@ def click(box):
     pyautogui.click(center[0], center[1])
 
 
+def adjust_subject(subject):
+    """
+    A function that adjusts the subject on the main entry screen.
+
+    :param subject:
+    :return:
+    """
+
+
 def select_category(category):
     """
     A function that moves the cursor to select a category to search the student by (first name, last name, or id).
@@ -114,3 +123,18 @@ def enter_search(search_box, search_term):
     """
     click(search_box)
     enter_search_term(search_term)
+
+
+def search(category, search_term, search_boxes):
+    """
+    A function that searches up a student on the search window popup.
+
+    :param category: the category by which to search the student by
+    :param search_term: the search term that corresponds with the category selected (first name, last name or id)
+    :param search_boxes: a dictionary of the relevant boxes necessary to find a student
+    :return: None
+    """
+    open_search(search_boxes["find"])
+    enter_category(search_boxes["category"], category)
+    enter_search(search_boxes["search"], search_term)
+    close_search(search_boxes["ok"])
