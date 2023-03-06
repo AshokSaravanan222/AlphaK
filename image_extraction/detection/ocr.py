@@ -89,6 +89,32 @@ def perform_closing(image, kernel):
     return cv2.morphologyEx(image, cv2.MORPH_CLOSE, kernel)
 
 
+def perform_tophat(image, kernel):
+    """
+    A function that performs a top hat ( or white hat) operation on an image.
+
+    Note: A top hat is an operation that reveals bright regions of an image on dark backgrounds.
+
+    :param image: the image that is to have a top hat performed
+    :param kernel: a small matrix that can be applied to the image
+    :return: the image after the top hat operation has been performed
+    """
+    return cv2.morphologyEx(image, cv2.MORPH_TOPHAT, kernel)
+
+
+def perform_blackhat(image, kernel):
+    """
+    A function that performs a black hat operation on an image.
+
+    Note: A black hat is an operation that reveals dark regions of an image on light backgrounds.
+
+    :param image: the image that is to have a black hat performed
+    :param kernel: a small matrix that can be applied to the image
+    :return: the image after the black hat operation has been performed
+    """
+    return cv2.morphologyEx(image, cv2.MORPH_BLACKHAT, kernel)
+
+
 def find_contours(image):
     """
     A function that finds the contours of image so the identity boxes can be found.

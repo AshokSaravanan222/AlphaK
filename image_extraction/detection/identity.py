@@ -3,22 +3,7 @@ import imutils
 import cv2
 
 
-def find_page(image):
-    """
-    A function that crops off the white borders on each image to isolate the homework organizer.
-
-    :param image: the image of the document-scanned page
-    :return: the image of just the homework organizer
-    """
-    height, width, _ = image.shape
-
-    border = (0.135, 0.07)
-    # page = imutils.Box(border[0] * width, border[1] * height, (1-2*border[0]) * width, (1-2*border[1]) * height)
-    page = imutils.Box(200, 100, 1300, 2000)
-    return imutils.crop(page, image)
-
-
-def find_identity_boxes(image):
+def find_identity_box(image):
     """
     A function that finds the location of the identity information (subject, name, and student_id).
 
@@ -29,6 +14,29 @@ def find_identity_boxes(image):
 
     identity_box = imutils.Box(0.1 * width, 0.07 * height, 0.35 * width, 0.12 * height)
     return imutils.crop(identity_box, image)
+
+
+def find_all_boxes(image):
+    """
+    A function that finds the all possible boxes on an image of the identity box.
+
+    :param image: an image of the identity box
+    :return: a list of Box objects that represent the coordinates of all possible boxes on the image
+    """
+    all_boxes = []
+
+    image = ocr.preprocess_image(image)
+
+    thresh = ocr.threshold_image(image)
+    kernel = ocr.create_kernel((15, 23))
+    dilate = ocr.dilate_image(thresh, kernel, 1)
+
+    contours = ocr.find_contours(dilate)
+    for c in contours:
+        x, y, w, h = cv2.boundingRect(c)
+        all_boxes.append(imutils.Box(x, y, w, h))
+
+    return all_boxes
 
 
 def remove_border_boxes(image, boxes):
@@ -55,49 +63,53 @@ def remove_logo(image, boxes):
     :return:
     """
 
+
 #  WRAPPER METHODS
 
 
-def find_subject_box(image):
+def remove_boxes(image, boxes):
+    """
+    A function that removes unnecessary boxes from the all possible boxes in the identity box.
+
+    :param image:
+    :param boxes:
+    :return:
+    """
+    remove_border_boxes(image, boxes)
+    remove_small_boxes(image, boxes)
+
+
+def find_identity_boxes(image):
+    """
+    A function that finds all the identity boxes on an image of a homework organizer (subject, name, and id).
+
+    :param image: an image of the homework organizer that only contains the three items (subject, name, and id)
+    :return: a list of Box objects (length of 3) that contain the coordinates to the identity boxes
+    """
+    identity_box = find_identity_box(image)
+    all_boxes = find_identity_boxes(identity_box)
+
+    remove_boxes(image, all_boxes)
+
+
+def find_subject_box(boxes):
     """
     A function that finds the 'subject' identity box on an image of a homework organizer.
 
     :param image:
     :return: A Box object that represents the location of the 'subject' box
     """
-    image = find_identity_boxes(image)
-    image = ocr.preprocess_image(image)
-    thresh = ocr.threshold_image(image)
-
-    kernel = ocr.create_kernel((15, 23))
-
-    dilate = ocr.dilate_image(thresh, kernel, 1)
-    erode = ocr.erode_image(thresh, kernel, 1)
-
-    opening = ocr.perform_opening(thresh, kernel)
-    closing = ocr.perform_closing(thresh, kernel)
-
-    # kernel = ocr.create_kernel((25, 1))
-    # dilate = ocr.dilate_image(opening, kernel, 1)
-
-    contours = ocr.find_contours(dilate)
-    dilate = cv2.cvtColor(image, cv2.COLOR_GRAY2RGB)
-
-    for c in contours:
-        x, y, w, h = cv2.boundingRect(c)
-        imutils.draw_box(imutils.Box(x, y, w, h), dilate)
-
-    return dilate
 
 
-def find_name_box():
+
+def find_name_box(boxes):
     """
     A function that finds the 'name' identity box on an image of a homework organizer.
     :return: A Box object that represents the location of the 'name' box
     """
 
 
-def find_student_id_box():
+def find_student_id_box(boxes):
     """
     A function that finds the 'student_id' identity box on an image of a homework organizer.
     :return: A Box object that represents the location of the 'student_id' box

@@ -1,8 +1,6 @@
 import enter
 import buttons
 import search
+import main
 
-__all__ = ['enter', 'buttons', 'search', ]
-
-
-# TODO: These methods should be converted into a new file
+__all__ = ['main', '', 'search', ]

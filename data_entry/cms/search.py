@@ -20,6 +20,7 @@ def adjust_subject(subject):
     :param subject:
     :return:
     """
+    # TODO: implement adjust_subject method
 
 
 def select_category(category):
@@ -56,6 +57,7 @@ def check_student(student):
     :param student: the full name of the student that needs to be checked
     :return: True if the student selected on the main screen matches the name of the student and False otherwise
     """
+    # TODO: implement check_student method
     return student == student
 
 
