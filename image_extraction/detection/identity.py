@@ -41,27 +41,46 @@ def find_all_boxes(image):
 
 def remove_border_boxes(image, boxes):
     """
-
-    :return:
+    A function that removes all boxes that lie along the border on an image of the identity box.
+    
+    :param image: the image of an identity box
+    :param boxes: a list of Box objects that contain the coordinates to all the identity boxes
+    :return: the updated list of Box objects that do not contain the border boxes
     """
+    w, h, _ = image.shape
+    border = 50
+    for i, box in enumerate(boxes):
+        if (0 < box.x < border) || (0 < box.y < border) || (w - border < box.x + box.w < w) || (h - border < box.y + box.h < h):
+            box.remove(i)
+    return boxes
 
 
 def remove_small_boxes(image, boxes):
     """
-    small width
-    :param image:
-    :param boxes:
-    :return:
+    A function that removes all boxes that have a small width on an image of the identity box.
+    
+    :param image: the image of an identity box
+    :param boxes: a list of Box objects that contain the coordinates to all the identity boxes
+    :return: the updated list of Box objects that do not contain the small width boxes
     """
+    for i, box in enumerate(boxes):
+        if box.w < 200:
+            boxes.remove(i)
+    return boxes
 
 
 def remove_logo(image, boxes):
     """
-
-    :param image:
-    :param boxes:
-    :return:
+    A function that removes the all of the kumon logo boxes on an image of the identity box.
+    
+    :param image: the image of an identity box
+    :param boxes: a list of Box objects that contain the coordinates to all the identity boxes
+    :return: the updated list of Box objects that do not contain the kumon logo box(es)
     """
+    subject_box = boxes.sorted(key=lambda x)[0]
+    
+    boxes = boxes.sorted(key=lambda y)
+    return boxes[boxes.index(subject_box):]
 
 
 #  WRAPPER METHODS
