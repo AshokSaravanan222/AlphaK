@@ -1,4 +1,5 @@
 import cv2
+import numpy as np
 
 
 class Box(object):
@@ -58,3 +59,15 @@ def display(image, win_name):
     """
     cv2.imshow(win_name, image)
     return cv2.waitKeyEx(0)
+
+
+def remove_box(image, box):
+    """
+    A function that removes a box from an image by adding a white mask on that particular area.
+
+    :param image: the image that contains the box
+    :param box: a Box object that needs to be removed from the image
+    :return: the image with the box removed
+    """
+    image[box.y:box.y + box.h, box.x:box.x + box.w] = 255
+    return image

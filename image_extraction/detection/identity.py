@@ -47,11 +47,13 @@ def remove_border_boxes(image, boxes):
     :param boxes: a list of Box objects that contain the coordinates to all the identity boxes
     :return: the updated list of Box objects that do not contain the border boxes
     """
-    w, h, _ = image.shape
-    border = 50
-    for i, box in enumerate(boxes):
-        if (0 < box.x < border) || (0 < box.y < border) || (w - border < box.x + box.w < w) || (h - border < box.y + box.h < h):
-            box.remove(i)
+    h, w, _ = image.shape
+    border = 25
+    for box in boxes:
+        if (0 <= box.x <= border) or (0 <= box.y <= border) or (w - border <= box.x + box.w <= w) or (h - border <= box.y + box.h <= h):
+            boxes.remove(box)
+        else:
+            print(f'x: {box.x}, y: {box.y}, w: {box.w}, h: {box.h}')
     return boxes
 
 
@@ -77,9 +79,9 @@ def remove_logo(image, boxes):
     :param boxes: a list of Box objects that contain the coordinates to all the identity boxes
     :return: the updated list of Box objects that do not contain the kumon logo box(es)
     """
-    subject_box = boxes.sorted(key=lambda x)[0]
+    subject_box = sorted(boxes, key=lambda box: boxes[box].x)[0]
     
-    boxes = boxes.sorted(key=lambda y)
+    boxes = sorted(boxes, key=lambda box: boxes[box].y)
     return boxes[boxes.index(subject_box):]
 
 
