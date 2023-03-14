@@ -9,16 +9,16 @@ from PyQt5 import uic
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi("loading.ui", self)
+        uic.loadUi("application/upload.ui", self)
 
         self.setWindowTitle("AlphaK")
-
-        button = QPushButton("Press Me!")
-
-        self.setFixedSize(QSize(400, 300))
-
-        # Set the central widget of the Window.
-        self.setCentralWidget(button)
+        #
+        # button = QPushButton("Press Me!")
+        #
+        # self.setFixedSize(QSize(400, 300))
+        #
+        # # Set the central widget of the Window.
+        # self.setCentralWidget(button)
 
 
 app = QApplication(sys.argv)
