@@ -1,6 +1,7 @@
 import ocr
 import imutils
 import cv2
+import numpy as np
 
 
 def find_identity_box(image):
@@ -42,47 +43,47 @@ def find_all_boxes(image):
 def remove_border_boxes(image, boxes):
     """
     A function that removes all boxes that lie along the border on an image of the identity box.
-    
+
     :param image: the image of an identity box
     :param boxes: a list of Box objects that contain the coordinates to all the identity boxes
-    :return: the updated list of Box objects that do not contain the border boxes
+    :return: the indexes of Box objects that need to be removed
     """
     h, w, _ = image.shape
-    border = 25
-    for box in boxes:
-        if (0 <= box.x <= border) or (0 <= box.y <= border) or (w - border <= box.x + box.w <= w) or (h - border <= box.y + box.h <= h):
-            boxes.remove(box)
-        else:
-            print(f'x: {box.x}, y: {box.y}, w: {box.w}, h: {box.h}')
-    return boxes
+    indexes = []
+    for i, box in enumerate(boxes):
+        if (box.x == 0) or (box.y == 0) or (w == box.x + box.w) or (h == box.y + box.h):
+            indexes.append(i)
+    return indexes
 
 
-def remove_small_boxes(image, boxes):
+def remove_small_boxes(boxes):
     """
     A function that removes all boxes that have a small width on an image of the identity box.
-    
-    :param image: the image of an identity box
+
     :param boxes: a list of Box objects that contain the coordinates to all the identity boxes
-    :return: the updated list of Box objects that do not contain the small width boxes
+    :return: the indexes of Box objects that need to be removed
     """
+    indexes = []
     for i, box in enumerate(boxes):
-        if box.w < 200:
-            boxes.remove(i)
-    return boxes
+        if box.w < 50:
+            indexes.append(i)
+    return indexes
 
 
-def remove_logo(image, boxes):
+def remove_logo(boxes):
     """
-    A function that removes the all of the kumon logo boxes on an image of the identity box.
-    
-    :param image: the image of an identity box
+    A function that removes the Kumon logo boxes on an image of the identity box.
+
     :param boxes: a list of Box objects that contain the coordinates to all the identity boxes
-    :return: the updated list of Box objects that do not contain the kumon logo box(es)
+    :return: the indexes of Box objects that need to be removed
     """
-    subject_box = sorted(boxes, key=lambda box: boxes[box].x)[0]
-    
-    boxes = sorted(boxes, key=lambda box: boxes[box].y)
-    return boxes[boxes.index(subject_box):]
+    subject_box = sorted(boxes, key=lambda box: box.x, reverse=True)[0]
+
+    indexes = []
+    for i, box in enumerate(boxes):
+        if (box.y < subject_box.h/2 + subject_box.y) and box != subject_box:
+            indexes.append(i)
+    return indexes
 
 
 #  WRAPPER METHODS
@@ -96,8 +97,12 @@ def remove_boxes(image, boxes):
     :param boxes:
     :return:
     """
-    remove_border_boxes(image, boxes)
-    remove_small_boxes(image, boxes)
+    indexes = [remove_border_boxes(image, boxes), remove_small_boxes(boxes)]
+    imutils.remove_indexes(indexes, image, boxes)
+
+    # implementation requires first two types to be removed before
+    indexes = [remove_logo(boxes)]
+    imutils.remove_indexes(indexes, image, boxes)
 
 
 def find_identity_boxes(image):

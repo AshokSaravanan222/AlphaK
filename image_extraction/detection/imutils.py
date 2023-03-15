@@ -67,7 +67,22 @@ def remove_box(image, box):
 
     :param image: the image that contains the box
     :param box: a Box object that needs to be removed from the image
-    :return: the image with the box removed
+    :return: None
     """
     image[box.y:box.y + box.h, box.x:box.x + box.w] = 255
-    return image
+
+# WRAPPER METHODS
+
+
+def remove_indexes(indexes, image, boxes):
+    """
+    A function that removes a box from an image given their indexes.
+
+    :param indexes: the indexes of the boxes which should be removed
+    :param image: the image that contains the box
+    :param boxes: a list of Box objects that represent all selections on an image
+    :return: None
+    """
+    for index in sorted(indexes, reverse=True):
+        remove_box(image, boxes[index])
+        del boxes[index]
