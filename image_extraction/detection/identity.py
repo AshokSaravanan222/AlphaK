@@ -95,7 +95,7 @@ def remove_boxes(image, boxes):
 
     :param image:
     :param boxes:
-    :return:
+    :return: a list of Box objects that represent all the boxes remaining on the image
     """
     indexes = [remove_border_boxes(image, boxes), remove_small_boxes(boxes)]
     imutils.remove_indexes(indexes, image, boxes)
@@ -103,6 +103,8 @@ def remove_boxes(image, boxes):
     # implementation requires first two types to be removed before
     indexes = [remove_logo(boxes)]
     imutils.remove_indexes(indexes, image, boxes)
+
+    return boxes
 
 
 def find_identity_boxes(image):
@@ -113,9 +115,9 @@ def find_identity_boxes(image):
     :return: a list of Box objects (length of 3) that contain the coordinates to the identity boxes
     """
     identity_box = find_identity_box(image)
-    all_boxes = find_identity_boxes(identity_box)
+    all_boxes = find_all_boxes(identity_box)
 
-    remove_boxes(image, all_boxes)
+    boxes = remove_boxes(image, all_boxes)
 
 
 def find_subject_box(boxes):
@@ -125,7 +127,6 @@ def find_subject_box(boxes):
     :param image:
     :return: A Box object that represents the location of the 'subject' box
     """
-
 
 
 def find_name_box(boxes):

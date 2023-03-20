@@ -9,7 +9,7 @@ class TestIdentity(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.image = imutils.read_image('test_images/image15.png')
+        cls.image = imutils.read_image('test_images/image1.png')
         cls.yes = 121  # keyboard code for 'y'
         cls.no = 110  # keyboard code for 'n'
 

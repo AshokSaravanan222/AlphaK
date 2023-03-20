@@ -1,17 +1,30 @@
 import sys
+from time import sleep
 
-from PyQt5.QtCore import QSize
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton
-from PyQt5 import uic
+from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QStackedWidget, QStackedLayout, QVBoxLayout
+from PyQt6 import uic
+
+from widgets import Welcome, Upload, Loading, Editor, View
 
 
 # Subclass QMainWindow to customize your application's main window
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi("application/upload.ui", self)
 
         self.setWindowTitle("AlphaK")
+
+        self.stackedLayout = QStackedLayout()
+
+        self.welcome = Welcome()
+        self.stackedLayout.addWidget(self.welcome)
+
+        self.loading = Loading()
+        self.stackedLayout.addWidget(self.loading)
+
+        self.stackedLayout.setCurrentIndex(0)
+
+
         #
         # button = QPushButton("Press Me!")
         #
@@ -21,12 +34,11 @@ class MainWindow(QMainWindow):
         # self.setCentralWidget(button)
 
 
-app = QApplication(sys.argv)
-
-window = MainWindow()
-window.show()
-
-app.exec()
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    window = MainWindow()
+    window.show()
+    app.exec()
 
 # import sys
 #
